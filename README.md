@@ -1,16 +1,16 @@
-## Hi there 👋
+## 👋 Hi, I'm Aditya
 
-<!--
-**adylagad/adylagad** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+USC MSCS • Machine Learning & Backend Engineering  
+Ex-Bajaj Finserv Health • Building AI + Energy + Ed-Tech projects
 
-Here are some ideas to get you started:
+### 🚀 What I'm Working On
+- Smart energy optimization dashboard using real APIs (Meteo, EIA, n8n, Lovable)
+- ML pipelines for failure prediction and medical datasets
+- Portfolio site with interactive projects and write-ups
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+### 🛠 Tech I Use
+Java • Python • React • Next.js • Scikit-Learn • XGBoost • Docker • Azure (AKS) • n8n • OpenAI
+
+### 🌐 Connect
+- [LinkedIn](https://www.linkedin.com/)  
+- [Portfolio](https://your-portfolio-link.com)
