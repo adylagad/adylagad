@@ -53,7 +53,7 @@ real-world APIs, ML pipelines, and automation workflows to solve impactful probl
 ## 🧩 GitHub Stats (Optional)
 > Remove this section if you prefer a minimal profile.
 
-![Aditya's GitHub stats](https://github-readme-stats.vercel.app/api?username=adityalagad&show_icons=true&hide_border=true)
+![Aditya's GitHub stats](https://github-readme-stats.vercel.app/api?username=adylagad&show_icons=true&hide_border=true)
 
 ---
 
