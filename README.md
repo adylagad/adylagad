@@ -12,5 +12,5 @@ Ex-Bajaj Finserv Health • Building AI + Energy + Ed-Tech projects
 Java • Python • React • Next.js • Scikit-Learn • XGBoost • Docker • Azure (AKS) • n8n • OpenAI
 
 ### 🌐 Connect
-- [LinkedIn](https://www.linkedin.com/)  
-- [Portfolio](https://your-portfolio-link.com)
+- [LinkedIn]([https://www.linkedin.com/](https://www.linkedin.com/in/adityalagad/))  
+- [Portfolio]([https://your-portfolio-link.com](https://adityalagad.vercel.app/))
