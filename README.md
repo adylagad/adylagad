@@ -40,7 +40,6 @@ real-world APIs, ML pipelines, and automation workflows to solve impactful probl
 - **Breast Cancer ML Suite** – supervised, semi-supervised & clustering approaches  
 - **Sequence Alignment (CSCI 570)** – algorithmic dynamic programming project  
 
-*(More repos below — pinned for easy access.)*
 
 ---
 
@@ -50,8 +49,7 @@ real-world APIs, ML pipelines, and automation workflows to solve impactful probl
 
 ---
 
-## 🧩 GitHub Stats (Optional)
-> Remove this section if you prefer a minimal profile.
+## 🧩 GitHub Stats
 
 ![Aditya's GitHub Stats](https://github-readme-stats-git-masterrstaa-rickstaa.vercel.app/api?username=adylagad&show_icons=true&hide_border=true)
 
