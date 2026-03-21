@@ -113,11 +113,31 @@ Previously **Software Engineer @ Bajaj Finserv Health** · **Intern @ CuriousJr*
 
 ---
 
+## Trophies
+
+<div align="center">
+
+<img src="https://github-profile-trophy.vercel.app/?username=adylagad&theme=darkhub&no-bg=true&no-frame=true&margin-w=10&column=-1" width="95%" />
+
+</div>
+
+---
+
 ## Activity
 
 <div align="center">
 
 <img src="https://github-readme-activity-graph.vercel.app/graph?username=adylagad&bg_color=030712&color=fcbb00&line=ff667f&point=fcbb00&area=true&area_color=ff2357&hide_border=true&custom_title=Contribution%20Activity" width="95%" />
+
+</div>
+
+---
+
+## 3D Contribution Graph
+
+<div align="center">
+
+<img src="./profile-3d-contrib/profile-south-season-animate.svg" width="95%" />
 
 </div>
 
