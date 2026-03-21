@@ -1,10 +1,8 @@
+<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=180&section=header&text=Aditya%20Lagad&fontSize=42&fontColor=fff&animation=twinkling&fontAlignY=35" />
+
 <div align="center">
 
-# Aditya Lagad
-
-**MS in Computer Science @ USC (Viterbi)**
-
-Machine Learning · Backend Engineering · AI Automation · Full-Stack Development
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&pause=1000&color=58A6FF&center=true&vCenter=true&width=520&lines=MS+Computer+Science+%40+USC+Viterbi;Machine+Learning+%7C+Backend+Engineering;AI+Automation+%7C+Full-Stack+Development;Building+scalable+AI-powered+systems)](https://git.io/typing-svg)
 
 [![Portfolio](https://img.shields.io/badge/Portfolio-adityalagad.vercel.app-000?style=for-the-badge&logo=vercel&logoColor=white)](https://adityalagad.vercel.app/)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-adityalagad-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/adityalagad/)
@@ -113,8 +111,16 @@ Previously **Software Engineer @ Bajaj Finserv Health** · **Intern @ CuriousJr*
 
 ---
 
+## Contribution Graph
+
 <div align="center">
 
-**Open to collaborating on ML projects, hackathons, and backend systems.**
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/adylagad/adylagad/output/github-snake-dark.svg" />
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/adylagad/adylagad/output/github-snake.svg" />
+  <img alt="Snake animation" src="https://raw.githubusercontent.com/adylagad/adylagad/output/github-snake-dark.svg" />
+</picture>
 
 </div>
+
+<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=100&section=footer" />
