@@ -137,7 +137,7 @@ Previously **Software Engineer @ Bajaj Finserv Health** · **Intern @ CuriousJr*
 
 <div align="center">
 
-<img src="./profile-3d-contrib/profile-south-season-animate.svg" width="95%" />
+<img src="./profile-3d-contrib/profile-custom-animate.svg" width="95%" />
 
 </div>
 

@@ -18,6 +18,20 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           USERNAME: adylagad
+          SETTING_JSON: |
+            [
+              {
+                "type": "normal",
+                "backgroundColor": "#030712",
+                "foregroundColor": "#d1d5dc",
+                "strongColor": "#fcbb00",
+                "weakColor": "#ff667f80",
+                "radarColor": "#ff235780",
+                "contribColors": ["#1e2939", "#ff667f55", "#ff667f99", "#fcbb00bb", "#fcbb00"],
+                "fileName": "profile-custom-animate.svg",
+                "isAnimate": true
+              }
+            ]
 
       - name: Commit & Push
         run: |
