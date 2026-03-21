@@ -1,12 +1,14 @@
-<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=180&section=header&text=Aditya%20Lagad&fontSize=42&fontColor=fff&animation=twinkling&fontAlignY=35" />
+<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:9B2335,100:D4A843&height=200&section=header&text=Aditya%20Lagad&fontSize=44&fontColor=fff&animation=twinkling&fontAlignY=35&desc=MS%20Computer%20Science%20%40%20USC%20Viterbi&descSize=16&descColor=E8D5B7&descAlignY=55" />
 
 <div align="center">
 
-[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&pause=1000&color=58A6FF&center=true&vCenter=true&width=520&lines=MS+Computer+Science+%40+USC+Viterbi;Machine+Learning+%7C+Backend+Engineering;AI+Automation+%7C+Full-Stack+Development;Building+scalable+AI-powered+systems)](https://git.io/typing-svg)
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&pause=1000&color=D4A843&center=true&vCenter=true&width=520&lines=Machine+Learning+%7C+Backend+Engineering;AI+Automation+%7C+Full-Stack+Development;Building+scalable+AI-powered+systems;Fight+On!+%E2%9C%8C%EF%B8%8F)](https://git.io/typing-svg)
 
-[![Portfolio](https://img.shields.io/badge/Portfolio-adityalagad.vercel.app-000?style=for-the-badge&logo=vercel&logoColor=white)](https://adityalagad.vercel.app/)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-adityalagad-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/adityalagad/)
-[![Email](https://img.shields.io/badge/Email-alagad@usc.edu-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:alagad@usc.edu)
+[![Portfolio](https://img.shields.io/badge/Portfolio-adityalagad.vercel.app-9B2335?style=for-the-badge&logo=vercel&logoColor=E8D5B7)](https://adityalagad.vercel.app/)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-adityalagad-9B2335?style=for-the-badge&logo=linkedin&logoColor=E8D5B7)](https://www.linkedin.com/in/adityalagad/)
+[![Email](https://img.shields.io/badge/Email-alagad@usc.edu-9B2335?style=for-the-badge&logo=gmail&logoColor=E8D5B7)](mailto:alagad@usc.edu)
+
+<img src="https://komarev.com/ghpvc/?username=adylagad&style=flat-square&color=9B2335&label=Profile+Views" alt="Profile views" />
 
 </div>
 
@@ -55,16 +57,16 @@ Previously **Software Engineer @ Bajaj Finserv Health** · **Intern @ CuriousJr*
 ## Featured Projects
 
 <a href="https://github.com/adylagad/silo-smasher">
-  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=adylagad&repo=silo-smasher&theme=github_dark&hide_border=true" />
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=adylagad&repo=silo-smasher&bg_color=0D1117&title_color=D4A843&text_color=E8D5B7&icon_color=C4626A&hide_border=true" />
 </a>
 <a href="https://github.com/adylagad/gh-api-graveyard">
-  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=adylagad&repo=gh-api-graveyard&theme=github_dark&hide_border=true" />
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=adylagad&repo=gh-api-graveyard&bg_color=0D1117&title_color=D4A843&text_color=E8D5B7&icon_color=C4626A&hide_border=true" />
 </a>
 <a href="https://github.com/adylagad/CSCI-561_Genetic-Algorithm">
-  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=adylagad&repo=CSCI-561_Genetic-Algorithm&theme=github_dark&hide_border=true" />
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=adylagad&repo=CSCI-561_Genetic-Algorithm&bg_color=0D1117&title_color=D4A843&text_color=E8D5B7&icon_color=C4626A&hide_border=true" />
 </a>
 <a href="https://github.com/adylagad/CSCI-570_Sequence-alignment">
-  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=adylagad&repo=CSCI-570_Sequence-alignment&theme=github_dark&hide_border=true" />
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=adylagad&repo=CSCI-570_Sequence-alignment&bg_color=0D1117&title_color=D4A843&text_color=E8D5B7&icon_color=C4626A&hide_border=true" />
 </a>
 
 ---
@@ -100,18 +102,28 @@ Previously **Software Engineer @ Bajaj Finserv Health** · **Intern @ CuriousJr*
 
 <div align="center">
 
-<img src="https://github-readme-stats.vercel.app/api?username=adylagad&show_icons=true&theme=github_dark&hide_border=true&count_private=true" height="170" />
-<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=adylagad&layout=compact&theme=github_dark&hide_border=true" height="170" />
+<img src="https://github-readme-stats.vercel.app/api?username=adylagad&show_icons=true&bg_color=0D1117&title_color=D4A843&text_color=E8D5B7&icon_color=C4626A&hide_border=true&count_private=true" height="170" />
+<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=adylagad&layout=compact&bg_color=0D1117&title_color=D4A843&text_color=E8D5B7&hide_border=true" height="170" />
 
 <br/>
 
-<img src="https://streak-stats.demolab.com?user=adylagad&theme=github-dark-blue&hide_border=true" />
+<img src="https://streak-stats.demolab.com?user=adylagad&background=0D1117&ring=D4A843&fire=C4626A&currStreakLabel=D4A843&sideLabels=E8D5B7&dates=E8D5B7AA&currStreakNum=D4A843&sideNums=C4626A&hide_border=true" />
 
 </div>
 
 ---
 
-## Contribution Graph
+## Activity
+
+<div align="center">
+
+<img src="https://github-readme-activity-graph.vercel.app/graph?username=adylagad&bg_color=0D1117&color=D4A843&line=C4626A&point=D4A843&area=true&area_color=9B2335&hide_border=true&custom_title=Contribution%20Activity" width="95%" />
+
+</div>
+
+---
+
+## Contribution Snake
 
 <div align="center">
 
@@ -123,4 +135,4 @@ Previously **Software Engineer @ Bajaj Finserv Health** · **Intern @ CuriousJr*
 
 </div>
 
-<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=100&section=footer" />
+<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:D4A843,100:9B2335&height=120&section=footer" />
