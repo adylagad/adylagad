@@ -2,13 +2,21 @@
 // layout + data definition, so the two theme variants can't drift apart.
 // Uses CSS animations (not GSAP/JS) since GitHub strips <script> from SVGs
 // embedded via <img>, but CSS @keyframes still run in that context.
+//
+// Only class selectors are used for animated/painted elements (no `id`,
+// no url(#id) gradient refs) — GitHub's image pipeline strips `id`
+// attributes from embedded SVGs, which silently breaks both CSS id
+// selectors and gradient IRI references, leaving shapes unstyled/invisible
+// with no error.
 const fs = require("fs");
 const path = require("path");
 
-const WIDTH = 720;
-const HEIGHT = 500;
-const RAIL_X = 60;
-const TEXT_X = 72;
+const WIDTH = 760;
+const PAD_LEFT = 48;
+const PAD_TOP = 48;
+const PAD_BOTTOM = 48;
+const RAIL_X = PAD_LEFT + 18;
+const TEXT_X = RAIL_X + 34;
 const LINE_DURATION = 2.0;
 
 const entries = [
@@ -45,16 +53,17 @@ const entries = [
   },
 ];
 
-// Manually laid out row geometry (mirrors the flow a flexbox version of
-// this would produce): each normal entry reserves 80px, the grouped Bajaj
-// entry reserves more to fit its header + 3 sub-roles + 2-line blurb.
-const rowHeights = [80, 80, 182, 80];
-let top = 36;
+// Manually laid out row geometry: each normal entry reserves 108px, the
+// grouped Bajaj entry reserves more for its header + 3 sub-roles + 2-line
+// blurb, all with generous breathing room between blocks.
+const rowHeights = [108, 108, 220, 108];
+let top = PAD_TOP;
 const rows = rowHeights.map(h => {
   const row = { top, height: h, centerY: top + h / 2 };
   top += h;
   return row;
 });
+const HEIGHT = top + PAD_BOTTOM;
 
 function palette(theme) {
   return theme === "dark"
@@ -68,8 +77,7 @@ function palette(theme) {
         subRail: "#21262d",
         dotFill: "#0d1117",
         dotStroke: "#818cf8",
-        lineFrom: "#818cf8",
-        lineTo: "#fb923c",
+        rail: "#818cf8",
       }
     : {
         bg: "#ffffff",
@@ -81,8 +89,7 @@ function palette(theme) {
         subRail: "#d0d7de",
         dotFill: "#ffffff",
         dotStroke: "#4f46e5",
-        lineFrom: "#4f46e5",
-        lineTo: "#c2410c",
+        rail: "#4f46e5",
       };
 }
 
@@ -96,16 +103,11 @@ function buildSvg(theme) {
   const lastY = rows[rows.length - 1].centerY;
   const lineLength = lastY - firstY;
 
-  let defs = `<linearGradient id="rail-${theme}" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="${c.lineFrom}"/>
-      <stop offset="100%" stop-color="${c.lineTo}"/>
-    </linearGradient>`;
-
   let style = `
     .dot-${theme} { transform-box: fill-box; transform-origin: center; animation-name: pop; animation-duration: 0.35s; animation-timing-function: cubic-bezier(0.34,1.56,0.64,1); animation-fill-mode: both; }
     .fade-${theme} { animation-name: fadein; animation-duration: 0.5s; animation-timing-function: ease-out; animation-fill-mode: both; }
     .subfade-${theme} { animation-name: fadein-sub; animation-duration: 0.35s; animation-timing-function: ease-out; animation-fill-mode: both; }
-    #line-${theme} { stroke-dasharray: ${lineLength}; stroke-dashoffset: ${lineLength}; animation: draw-${theme} ${LINE_DURATION}s cubic-bezier(0.45,0,0.55,1) both; }
+    .rail-${theme} { stroke-dasharray: ${lineLength}; stroke-dashoffset: ${lineLength}; animation: draw-${theme} ${LINE_DURATION}s cubic-bezier(0.45,0,0.55,1) both; }
     @keyframes draw-${theme} { to { stroke-dashoffset: 0; } }
     @keyframes pop { from { transform: scale(0); } to { transform: scale(1); } }
     @keyframes fadein { from { opacity: 0; transform: translateX(16px); } to { opacity: 1; transform: translateX(0); } }
@@ -119,7 +121,7 @@ function buildSvg(theme) {
 
     body += `<circle class="dot-${theme}" cx="${RAIL_X}" cy="${row.centerY}" r="8" fill="${c.dotFill}" stroke="${c.dotStroke}" stroke-width="2" style="animation-delay:${atLine.toFixed(2)}s"/>\n`;
 
-    const titleBaseline = row.top + 14 + 18;
+    const titleBaseline = row.top + 28;
     let titleSpans = `${esc(entry.title)} `;
     if (entry.company) {
       titleSpans += `<tspan fill="${c.company}" font-weight="600">@ ${esc(entry.company)}</tspan> `;
@@ -129,37 +131,37 @@ function buildSvg(theme) {
     body += `<g class="fade-${theme}" style="animation-delay:${(atLine + 0.05).toFixed(2)}s">\n`;
     body += `<text x="${TEXT_X}" y="${titleBaseline}" font-size="21" font-weight="700" fill="${c.title}">${titleSpans}</text>\n`;
 
-    let cursorY = titleBaseline;
+    let blurbStartY;
 
     if (entry.subRoles) {
-      const railTop = titleBaseline + 10;
-      const rowH = 24;
-      const railBottom = railTop + entry.subRoles.length * rowH - rowH + 8;
+      const railTop = titleBaseline + 20;
+      const rowH = 34;
+      const railBottom = railTop + (entry.subRoles.length - 1) * rowH + 8;
       body += `<line x1="${TEXT_X + 8}" y1="${railTop}" x2="${TEXT_X + 8}" y2="${railBottom}" stroke="${c.subRail}" stroke-width="2"/>\n`;
 
       entry.subRoles.forEach((sr, si) => {
-        const y = railTop + si * rowH + 12;
+        const y = railTop + si * rowH + 14;
         body += `<g class="subfade-${theme}" style="animation-delay:${(atLine + 0.25 + si * 0.1).toFixed(2)}s">`;
         body += `<circle cx="${TEXT_X + 8}" cy="${y - 4}" r="4" fill="${c.company}"/>`;
-        body += `<text x="${TEXT_X + 24}" y="${y}" font-size="14" font-weight="600" fill="${c.subTitle}">${esc(sr.title)} <tspan font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="${c.date}">${esc(sr.dates)}</tspan></text>`;
+        body += `<text x="${TEXT_X + 26}" y="${y}" font-size="14" font-weight="600" fill="${c.subTitle}">${esc(sr.title)} <tspan font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="${c.date}">${esc(sr.dates)}</tspan></text>`;
         body += `</g>\n`;
       });
-      cursorY = railBottom + 10;
+      blurbStartY = railTop + (entry.subRoles.length - 1) * rowH + 14 + 30;
+    } else {
+      blurbStartY = titleBaseline + 34;
     }
 
-    const blurbStartY = entry.subRoles ? cursorY + 12 : titleBaseline + 26;
     entry.blurbLines.forEach((line, li) => {
-      body += `<text x="${TEXT_X}" y="${blurbStartY + li * 18}" font-size="14" fill="${c.blurb}">${esc(line)}</text>\n`;
+      body += `<text x="${TEXT_X}" y="${blurbStartY + li * 20}" font-size="14" fill="${c.blurb}">${esc(line)}</text>\n`;
     });
 
     body += `</g>\n`;
   });
 
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${WIDTH}" height="${HEIGHT}" viewBox="0 0 ${WIDTH} ${HEIGHT}" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif">
-  <defs>${defs}</defs>
   <style>${style}</style>
   <rect width="${WIDTH}" height="${HEIGHT}" fill="${c.bg}"/>
-  <line id="line-${theme}" x1="${RAIL_X}" y1="${firstY}" x2="${RAIL_X}" y2="${lastY}" stroke="url(#rail-${theme})" stroke-width="2" stroke-linecap="round"/>
+  <line class="rail-${theme}" x1="${RAIL_X}" y1="${firstY}" x2="${RAIL_X}" y2="${lastY}" stroke="${c.rail}" stroke-width="2" stroke-linecap="round"/>
   ${body}
 </svg>`;
 }
