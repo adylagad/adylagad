@@ -11,6 +11,7 @@
 // url(#id) references (found the hard way with an earlier gradient rail).
 const fs = require("fs");
 const path = require("path");
+const { chromium } = require("playwright");
 
 const WIDTH = 780;
 const PAD_LEFT = 48;
@@ -19,6 +20,7 @@ const PAD_BOTTOM = 48;
 const RAIL_X = PAD_LEFT + 18;
 const TEXT_X = RAIL_X + 34;
 const LINE_DURATION = 2.0;
+const CHIP_GAP = 8;
 
 // Chip colors are theme-independent -- they carry their own background
 // fill and always use black text, so they read the same on light or dark.
@@ -34,13 +36,11 @@ const entries = [
     title: "Junior Software Engineer",
     company: "Fetch.ai",
     dates: "May 2026 — Present",
-    blurbLines: ["Building AI agents and contributing to the ASI One mobile team."],
   },
   {
     title: "Software Engineer Intern",
     company: "Orbit AI",
     dates: "Jan 2026 — May 2026",
-    blurbLines: ["Built full-stack features for AI-powered, personalized college admissions guidance."],
   },
   {
     title: "Bajaj Finserv Health",
@@ -50,23 +50,18 @@ const entries = [
       { title: "Associate Software Engineer", dates: "Jul 2023 — Sep 2024" },
       { title: "Software Engineer Intern", dates: "Jan 2023 — Jun 2023" },
     ],
-    blurbLines: [
-      "Progressed from intern to full-time engineer, building features and",
-      "improving performance across mobile and web.",
-    ],
   },
   {
     title: "Software Engineer Intern",
     company: "CuriousJr",
     dates: "May 2022 — Dec 2022",
-    blurbLines: ["Built educational games that made learning fun and engaging for kids."],
   },
 ];
 
-// Manually laid out row geometry: each normal entry reserves 116px, the
-// grouped Bajaj entry reserves more for its header + 3 sub-roles + 2-line
-// blurb, all with generous breathing room between blocks.
-const rowHeights = [116, 116, 236, 116];
+// Manually laid out row geometry: each normal entry reserves 90px (title
+// line + date chip on its own line below), the grouped Bajaj entry
+// reserves more for its header/date lines plus 3 sub-roles.
+const rowHeights = [90, 90, 200, 90];
 let top = PAD_TOP;
 const rows = rowHeights.map(h => {
   const row = { top, height: h, centerY: top + h / 2 };
@@ -80,7 +75,6 @@ function palette(theme) {
     ? {
         bg: "#0d1117",
         title: "#f2ede0",
-        blurb: "#9a938a",
         subTitle: "#d8d2c5",
         subRail: "#30363d",
         rail: "#30363d",
@@ -89,7 +83,6 @@ function palette(theme) {
     : {
         bg: "#ffffff",
         title: "#1a1a1a",
-        blurb: "#5c5650",
         subTitle: "#26241f",
         subRail: "#d8d2c8",
         rail: "#d8d2c8",
@@ -101,10 +94,65 @@ function esc(s) {
   return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
-// Rough average-char-width estimate (good enough for sizing a decorative
-// chip background, not pixel-exact text layout).
-function estimateWidth(text, fontSize) {
-  return text.length * fontSize * 0.6;
+const SANS_STACK = "-apple-system, Segoe UI, Helvetica, Arial, sans-serif";
+const MONO_STACK = "ui-monospace, SFMono-Regular, Menlo, monospace";
+
+function widthKey(text, fontSize, mono, weight) {
+  return text + "|" + fontSize + "|" + (mono ? 1 : 0) + "|" + weight;
+}
+
+// Exact text widths measured in a real browser (SVG getComputedTextLength)
+// rather than guessed from an average-char-width factor -- an earlier
+// version estimated width and visibly misplaced chips next to text.
+let WIDTHS = null;
+function widthOf(text, fontSize, mono, weight) {
+  weight = weight || 700;
+  const w = WIDTHS.get(widthKey(text, fontSize, mono, weight));
+  if (w === undefined) throw new Error('No measured width for "' + text + '" (register it in collectMeasurements)');
+  return w;
+}
+
+async function measureAll(requests) {
+  const browser = await chromium.launch();
+  const page = await browser.newPage();
+  await page.setContent('<svg xmlns="http://www.w3.org/2000/svg"><text id="m"></text></svg>');
+  const results = await page.evaluate(({ reqs, sansStack, monoStack }) => {
+    const el = document.getElementById("m");
+    return reqs.map(({ text, fontSize, mono, weight }) => {
+      el.setAttribute("font-size", fontSize);
+      el.setAttribute("font-weight", weight);
+      el.setAttribute("font-family", mono ? monoStack : sansStack);
+      el.textContent = text;
+      return el.getComputedTextLength();
+    });
+  }, { reqs: requests, sansStack: SANS_STACK, monoStack: MONO_STACK });
+  await browser.close();
+
+  const map = new Map();
+  requests.forEach((r, i) => map.set(widthKey(r.text, r.fontSize, r.mono, r.weight), results[i]));
+  return map;
+}
+
+function collectMeasurements() {
+  const reqs = [];
+  const seen = new Set();
+  const add = (text, fontSize, mono, weight) => {
+    weight = weight || 700;
+    const k = widthKey(text, fontSize, mono, weight);
+    if (!seen.has(k)) { seen.add(k); reqs.push({ text, fontSize, mono: !!mono, weight }); }
+  };
+  entries.forEach(entry => {
+    if (entry.company) add(entry.title + " @ ", 21, false);
+    add(entry.company || entry.title, 21, false);
+    add(entry.dates, 13, true);
+    if (entry.subRoles) {
+      entry.subRoles.forEach(sr => {
+        add(sr.title + " ", 14, false, 600);
+        add(sr.dates, 12, true);
+      });
+    }
+  });
+  return reqs;
 }
 
 // A rotated, drop-shadowed "chip": colored rect + black text, offset
@@ -113,16 +161,14 @@ function estimateWidth(text, fontSize) {
 function buildChip(x, baseline, text, { fontSize, mono, color }) {
   const padX = fontSize >= 18 ? 12 : 9;
   const padY = fontSize >= 18 ? 6 : 5;
-  const textW = estimateWidth(text, fontSize);
+  const textW = widthOf(text, fontSize, mono);
   const chipW = textW + padX * 2;
   const chipH = fontSize * 0.94 + padY * 2;
   const chipY = baseline - fontSize * 0.74 - padY;
   const cx = x + chipW / 2;
   const cy = chipY + chipH / 2;
   const rot = nextRotation();
-  const fontFamily = mono
-    ? "ui-monospace, SFMono-Regular, Menlo, monospace"
-    : "-apple-system, Segoe UI, Helvetica, Arial, sans-serif";
+  const fontFamily = mono ? MONO_STACK : SANS_STACK;
   const svg = `<g transform="rotate(${rot} ${cx.toFixed(1)} ${cy.toFixed(1)})">
     <rect x="${(x + 2).toFixed(1)}" y="${(chipY + 3).toFixed(1)}" width="${chipW.toFixed(1)}" height="${chipH.toFixed(1)}" rx="6" fill="#000000" opacity="0.35"/>
     <rect x="${x.toFixed(1)}" y="${chipY.toFixed(1)}" width="${chipW.toFixed(1)}" height="${chipH.toFixed(1)}" rx="6" fill="${color}"/>
@@ -166,26 +212,24 @@ function buildSvg(theme) {
 
     body += `<g class="fade-${theme}" style="animation-delay:${(atLine + 0.05).toFixed(2)}s">\n`;
 
-    let cursorX = TEXT_X;
     if (entry.company) {
       const prefix = `${entry.title} @ `;
-      body += `<text x="${cursorX}" y="${titleBaseline}" font-size="21" font-weight="700" fill="${c.title}">${esc(prefix)}</text>\n`;
-      cursorX += estimateWidth(prefix, 21);
-      const chip = buildChip(cursorX, titleBaseline, entry.company, { fontSize: 21, color: entryColor });
+      body += `<text x="${TEXT_X}" y="${titleBaseline}" font-size="21" font-weight="700" fill="${c.title}">${esc(prefix)}</text>\n`;
+      const chip = buildChip(TEXT_X + widthOf(prefix, 21, false) + CHIP_GAP, titleBaseline, entry.company, { fontSize: 21, color: entryColor });
       body += chip.svg;
-      cursorX += chip.width + 12;
     } else {
-      const chip = buildChip(cursorX, titleBaseline, entry.title, { fontSize: 21, color: entryColor });
+      const chip = buildChip(TEXT_X, titleBaseline, entry.title, { fontSize: 21, color: entryColor });
       body += chip.svg;
-      cursorX += chip.width + 12;
     }
-    const dateChip = buildChip(cursorX, titleBaseline, entry.dates, { fontSize: 13, mono: true, color: dateColor });
+
+    // Date chip sits on its own line below the title, not crammed onto
+    // the same line -- keeps each row to a single clean focal point.
+    const dateBaseline = titleBaseline + 34;
+    const dateChip = buildChip(TEXT_X, dateBaseline, entry.dates, { fontSize: 13, mono: true, color: dateColor });
     body += dateChip.svg;
 
-    let blurbStartY;
-
     if (entry.subRoles) {
-      const railTop = titleBaseline + 24;
+      const railTop = dateBaseline + 30;
       const rowH = 38;
       const railBottom = railTop + (entry.subRoles.length - 1) * rowH + 8;
       body += `<line x1="${TEXT_X + 8}" y1="${railTop}" x2="${TEXT_X + 8}" y2="${railBottom}" stroke="${c.subRail}" stroke-width="2"/>\n`;
@@ -197,19 +241,12 @@ function buildSvg(theme) {
         body += `<g class="subfade-${theme}" style="animation-delay:${(atLine + 0.25 + si * 0.1).toFixed(2)}s">`;
         body += `<circle cx="${TEXT_X + 8}" cy="${y - 4}" r="4" fill="${subDotColor}"/>`;
         body += `<text x="${TEXT_X + 26}" y="${y}" font-size="14" font-weight="600" fill="${c.subTitle}">${esc(sr.title)} </text>`;
-        const srTextW = estimateWidth(sr.title + " ", 14);
-        const srChip = buildChip(TEXT_X + 26 + srTextW, y, sr.dates, { fontSize: 12, mono: true, color: subDateColor });
+        const srPrefix = sr.title + " ";
+        const srChip = buildChip(TEXT_X + 26 + widthOf(srPrefix, 14, false, 600) + CHIP_GAP, y, sr.dates, { fontSize: 12, mono: true, color: subDateColor });
         body += srChip.svg;
         body += `</g>\n`;
       });
-      blurbStartY = railTop + (entry.subRoles.length - 1) * rowH + 14 + 32;
-    } else {
-      blurbStartY = titleBaseline + 36;
     }
-
-    entry.blurbLines.forEach((line, li) => {
-      body += `<text x="${TEXT_X}" y="${blurbStartY + li * 20}" font-size="14" fill="${c.blurb}">${esc(line)}</text>\n`;
-    });
 
     body += `</g>\n`;
   });
@@ -222,6 +259,9 @@ function buildSvg(theme) {
 </svg>`;
 }
 
-fs.writeFileSync(path.join(__dirname, "job-timeline-dark.svg"), buildSvg("dark"));
-fs.writeFileSync(path.join(__dirname, "job-timeline-light.svg"), buildSvg("light"));
-console.log("Generated job-timeline-dark.svg and job-timeline-light.svg");
+(async () => {
+  WIDTHS = await measureAll(collectMeasurements());
+  fs.writeFileSync(path.join(__dirname, "job-timeline-dark.svg"), buildSvg("dark"));
+  fs.writeFileSync(path.join(__dirname, "job-timeline-light.svg"), buildSvg("light"));
+  console.log("Generated job-timeline-dark.svg and job-timeline-light.svg");
+})();
