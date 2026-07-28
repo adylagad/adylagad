@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="354" viewBox="0 0 780 354" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif">
+  <style>
+    .row-light { transform-box: fill-box; transform-origin: left center; animation-name: row-in; animation-duration: 0.45s; animation-timing-function: ease-out; animation-fill-mode: both; }
+    .underline-light { animation-name: draw-underline; animation-duration: 0.4s; animation-timing-function: cubic-bezier(0.45,0,0.55,1); animation-fill-mode: both; }
+    .degree-light { animation-name: degree-in; animation-duration: 0.3s; animation-timing-function: ease-out; animation-fill-mode: both; }
+    .divider-light { animation-name: draw-divider; animation-duration: 0.7s; animation-timing-function: cubic-bezier(0.45,0,0.55,1); animation-fill-mode: both; }
+    @keyframes row-in { from { opacity: 0; transform: translateX(-14px); } to { opacity: 1; transform: translateX(0); } }
+    @keyframes draw-underline { to { stroke-dashoffset: 0; } }
+    @keyframes degree-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes draw-divider { to { stroke-dashoffset: 0; } }
+  </style>
+  <rect width="780" height="354" fill="#ffffff"/>
+  <g class="row-light" style="animation-delay:0.00s">
+<text x="48" y="67.4" font-size="19" font-weight="600" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#FFC72C">01</text>
+<text x="116" y="67.4" font-size="30" font-weight="700" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" fill="#1a1a1a">University of Southern California</text>
+<line class="underline-light" x1="116" y1="75.4" x2="584.40625" y2="75.4" stroke="#B71234" stroke-width="3" stroke-linecap="round" stroke-dasharray="468.4" stroke-dashoffset="468.4" style="animation-delay:0.30s"/>
+<text class="degree-light" x="116" y="105.4" font-size="16" font-weight="500" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" fill="#5b564c" style="animation-delay:0.55s">M.S. Computer Science</text>
+</g>
+<line class="divider-light" x1="48" y1="135" x2="732" y2="135" stroke="#e8e3d8" stroke-width="1.5" stroke-dasharray="684" stroke-dashoffset="684" style="animation-delay:0.15s"/>
+<g class="row-light" style="animation-delay:0.35s">
+<text x="48" y="181.4" font-size="19" font-weight="600" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#22D3EE">02</text>
+<text x="116" y="181.4" font-size="30" font-weight="700" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" fill="#1a1a1a">Pune Institute of Computer Technology</text>
+<line class="underline-light" x1="116" y1="189.4" x2="675.453125" y2="189.4" stroke="#7C3AED" stroke-width="3" stroke-linecap="round" stroke-dasharray="559.5" stroke-dashoffset="559.5" style="animation-delay:0.65s"/>
+<text class="degree-light" x="116" y="219.4" font-size="16" font-weight="500" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" fill="#5b564c" style="animation-delay:0.90s">B.E. Computer Engineering</text>
+</g>
+<line class="divider-light" x1="48" y1="249" x2="732" y2="249" stroke="#e8e3d8" stroke-width="1.5" stroke-dasharray="684" stroke-dashoffset="684" style="animation-delay:0.50s"/>
+<g class="row-light" style="animation-delay:0.70s">
+<text x="48" y="295.4" font-size="19" font-weight="600" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#FF7A1A">03</text>
+<text x="116" y="295.4" font-size="30" font-weight="700" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" fill="#1a1a1a">Auxilium Convent School</text>
+<line class="underline-light" x1="116" y1="303.4" x2="479.359375" y2="303.4" stroke="#FF7A1A" stroke-width="3" stroke-linecap="round" stroke-dasharray="363.4" stroke-dashoffset="363.4" style="animation-delay:1.00s"/>
+</g>
+<line class="divider-light" x1="48" y1="333" x2="732" y2="333" stroke="#e8e3d8" stroke-width="1.5" stroke-dasharray="684" stroke-dashoffset="684" style="animation-delay:0.85s"/>
+
+</svg>
