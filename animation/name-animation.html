@@ -46,21 +46,28 @@
     const split = SplitText.create("#name", { type: "chars" });
     const chars = split.chars; // [A, d, i, t, y, a]
 
-    function scrambleChar(el, toText) {
+    // Fixed (not Math.random-based) per-character variation, keyed by index
+    // within each 6-char phase, so total timeline duration is deterministic
+    // and reproducible run-to-run — required for capturing a seamless loop.
+    const DURATIONS = [0.9, 1.15, 0.95, 1.2, 1.0, 1.1];
+    const SPEEDS = [0.22, 0.32, 0.25, 0.35, 0.28, 0.3];
+    const REVEALS = [0.3, 0.45, 0.35, 0.5, 0.32, 0.4];
+
+    function scrambleChar(el, toText, seedIdx) {
       return gsap.to(el, {
-        duration: gsap.utils.random(0.85, 1.2),
+        duration: DURATIONS[seedIdx % DURATIONS.length],
         scrambleText: {
           text: toText,
-          chars: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-          speed: gsap.utils.random(0.2, 0.35),
-          revealDelay: gsap.utils.random(0.3, 0.5)
+          chars: "★▲●◆✦⬢✧▶■◼▽◎✱❖",
+          speed: SPEEDS[seedIdx % SPEEDS.length],
+          revealDelay: REVEALS[seedIdx % REVEALS.length]
         },
         ease: "none"
       });
     }
 
-    function buildLetterStep(tl, el, toText, hide, startPos) {
-      tl.add(scrambleChar(el, toText), startPos);
+    function buildLetterStep(tl, el, toText, hide, startPos, seedIdx) {
+      tl.add(scrambleChar(el, toText, seedIdx), startPos);
       tl.to(el, { color: ORANGE, duration: 0.4 }, "<");
       tl.to(el, { color: INDIGO, duration: 0.45 }, ">-0.05");
       if (hide !== null) {
@@ -83,7 +90,7 @@
       { i: 4, to: "y", hide: true },
       { i: 5, to: "a", hide: true }
     ];
-    shrinkPlan.forEach((p, idx) => buildLetterStep(master, chars[p.i], p.to, p.hide, 0.6 + idx * 0.22));
+    shrinkPlan.forEach((p, idx) => buildLetterStep(master, chars[p.i], p.to, p.hide, 0.6 + idx * 0.22, idx));
 
     master.addLabel("adyHold", "+=1.0");
 
@@ -96,7 +103,9 @@
       { i: 4, to: "y", hide: false },
       { i: 5, to: "a", hide: false }
     ];
-    expandPlan.forEach((p, idx) => buildLetterStep(master, chars[p.i], p.to, p.hide, `adyHold+=${idx * 0.22}`));
+    expandPlan.forEach((p, idx) => buildLetterStep(master, chars[p.i], p.to, p.hide, `adyHold+=${idx * 0.22}`, idx));
+
+    window.master = master;
   </script>
 </body>
 </html>
