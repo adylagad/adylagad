@@ -1,0 +1,186 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 720px;
+    height: 500px;
+    background: #0d1117;
+    overflow: hidden;
+    font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  #stage {
+    display: flex;
+    padding: 36px 48px;
+    box-sizing: border-box;
+    height: 100%;
+  }
+  #rail {
+    position: relative;
+    width: 24px;
+    flex: 0 0 24px;
+  }
+  #line {
+    position: absolute;
+    top: 6px;
+    left: 11px;
+    width: 2px;
+    height: 0px;
+    background: linear-gradient(#818cf8, #fb923c);
+    border-radius: 1px;
+  }
+  .dot {
+    position: absolute;
+    left: 4px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #0d1117;
+    border: 2px solid #818cf8;
+    transform: scale(0);
+    box-sizing: border-box;
+  }
+  #entries {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .entry {
+    padding: 14px 0;
+    opacity: 0;
+    transform: translateX(16px);
+  }
+  .entry .role {
+    color: #e6edf3;
+    font-size: 21px;
+    font-weight: 700;
+  }
+  .entry .role .company {
+    color: #818cf8;
+    font-weight: 600;
+  }
+  .dates {
+    display: inline-block;
+    margin-left: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #fb923c;
+    background: rgba(251, 146, 60, 0.12);
+    padding: 2px 8px;
+    border-radius: 10px;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+  .entry .blurb {
+    margin-top: 6px;
+    font-size: 14px;
+    color: #8b949e;
+    max-width: 520px;
+  }
+  .sub-roles {
+    margin: 10px 0 0 2px;
+    padding-left: 16px;
+    border-left: 2px solid #21262d;
+  }
+  .sub-role {
+    position: relative;
+    padding: 3px 0 3px 16px;
+    opacity: 0;
+  }
+  .sub-role .sub-dot {
+    position: absolute;
+    left: -6px;
+    top: 9px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #818cf8;
+  }
+  .sub-role .sub-title {
+    color: #c9d1d9;
+    font-size: 14px;
+    font-weight: 600;
+  }
+</style>
+</head>
+<body>
+  <div id="stage">
+    <div id="rail">
+      <div id="line"></div>
+      <div class="dot" data-i="0"></div>
+      <div class="dot" data-i="1"></div>
+      <div class="dot" data-i="2"></div>
+      <div class="dot" data-i="3"></div>
+    </div>
+    <div id="entries">
+      <div class="entry" data-i="0">
+        <div class="role">Junior Software Engineer <span class="company">@ Fetch.ai</span><span class="dates">May 2026 — Present</span></div>
+        <div class="blurb">Building AI agents and contributing to the ASI One mobile team.</div>
+      </div>
+      <div class="entry" data-i="1">
+        <div class="role">Software Engineer Intern <span class="company">@ Orbit AI</span><span class="dates">Jan 2026 — May 2026</span></div>
+        <div class="blurb">Built full-stack features for AI-powered, personalized college admissions guidance.</div>
+      </div>
+      <div class="entry" data-i="2">
+        <div class="role">Bajaj Finserv Health <span class="dates">Jan 2023 — Apr 2025</span></div>
+        <div class="sub-roles">
+          <div class="sub-role"><span class="sub-dot"></span><span class="sub-title">Software Engineer</span><span class="dates">Oct 2024 — Apr 2025</span></div>
+          <div class="sub-role"><span class="sub-dot"></span><span class="sub-title">Associate Software Engineer</span><span class="dates">Jul 2023 — Sep 2024</span></div>
+          <div class="sub-role"><span class="sub-dot"></span><span class="sub-title">Software Engineer Intern</span><span class="dates">Jan 2023 — Jun 2023</span></div>
+        </div>
+        <div class="blurb">Progressed from intern to full-time engineer, building features and improving performance across mobile and web.</div>
+      </div>
+      <div class="entry" data-i="3">
+        <div class="role">Software Engineer Intern <span class="company">@ CuriousJr</span><span class="dates">May 2022 — Dec 2022</span></div>
+        <div class="blurb">Built educational games that made learning fun and engaging for kids.</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="gsap.min.js"></script>
+  <script>
+    window.animationDone = false;
+
+    const entries = gsap.utils.toArray(".entry");
+    const dots = gsap.utils.toArray(".dot");
+
+    // Vertical center (relative to #rail) of each entry, used to size the
+    // line and position dots without hardcoding pixel values per entry —
+    // works even though the Bajaj entry is taller than the rest.
+    const rail = document.getElementById("rail");
+    const railTop = rail.getBoundingClientRect().top;
+    const centers = entries.map(el => {
+      const r = el.getBoundingClientRect();
+      return (r.top + r.height / 2) - railTop;
+    });
+
+    dots.forEach((dot, i) => { dot.style.top = `${centers[i] - 8}px`; });
+
+    const lineTotal = centers[centers.length - 1];
+    const lineDuration = 2.1;
+
+    const master = gsap.timeline({
+      onComplete: () => { window.animationDone = true; },
+      defaults: { ease: "power2.out" }
+    });
+
+    master.to("#line", { height: lineTotal, duration: lineDuration, ease: "power1.inOut" }, 0);
+
+    entries.forEach((entry, i) => {
+      const atLine = (centers[i] / lineTotal) * lineDuration;
+      master.to(dots[i], { scale: 1, duration: 0.35, ease: "back.out(2)" }, atLine);
+      master.to(entry, { opacity: 1, x: 0, duration: 0.5 }, atLine + 0.05);
+
+      const subRoles = entry.querySelectorAll(".sub-role");
+      if (subRoles.length) {
+        master.to(subRoles, { opacity: 1, duration: 0.35, stagger: 0.1 }, atLine + 0.25);
+      }
+    });
+
+    window.master = master;
+  </script>
+</body>
+</html>
