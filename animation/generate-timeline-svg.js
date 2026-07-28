@@ -70,26 +70,26 @@ function palette(theme) {
     ? {
         bg: "#0d1117",
         title: "#e6edf3",
-        company: "#6366f1",
+        company: "#5b4e99",
         date: "#fb923c",
         blurb: "#8b949e",
         subTitle: "#c9d1d9",
         subRail: "#21262d",
         dotFill: "#0d1117",
-        dotStroke: "#6366f1",
-        rail: "#6366f1",
+        dotStroke: "#5b4e99",
+        rail: "#5b4e99",
       }
     : {
         bg: "#ffffff",
         title: "#1f2328",
-        company: "#4f46e5",
+        company: "#2C224D",
         date: "#c2410c",
         blurb: "#57606a",
         subTitle: "#24292f",
         subRail: "#d0d7de",
         dotFill: "#ffffff",
-        dotStroke: "#4f46e5",
-        rail: "#4f46e5",
+        dotStroke: "#2C224D",
+        rail: "#2C224D",
       };
 }
 
