@@ -8,7 +8,7 @@
     padding: 0;
     width: 700px;
     height: 220px;
-    background: #05070c;
+    background: #0d1117;
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -53,12 +53,19 @@
     const SPEEDS = [0.22, 0.32, 0.25, 0.35, 0.28, 0.3];
     const REVEALS = [0.3, 0.45, 0.35, 0.5, 0.32, 0.4];
 
+    const LETTER_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const ICON_CHARS = "★▲●◆✦⬢✧▶■◼▽◎✱❖";
+    // Only these positions (within each 6-char phase) scramble through
+    // icon glyphs instead of letters -- keeps it as a rare accent, not
+    // the whole word.
+    const ICON_INDICES = new Set([1, 4]);
+
     function scrambleChar(el, toText, seedIdx) {
       return gsap.to(el, {
         duration: DURATIONS[seedIdx % DURATIONS.length],
         scrambleText: {
           text: toText,
-          chars: "★▲●◆✦⬢✧▶■◼▽◎✱❖",
+          chars: ICON_INDICES.has(seedIdx) ? ICON_CHARS : LETTER_CHARS,
           speed: SPEEDS[seedIdx % SPEEDS.length],
           revealDelay: REVEALS[seedIdx % REVEALS.length]
         },
