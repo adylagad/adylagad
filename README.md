@@ -1,8 +1,6 @@
 <div align="center">
-  <img src="animation/name-animation.gif" alt="Aditya" width="560">
+  <img src="animation/name-animation.gif" alt="Hi, I'm Aditya" width="800">
 </div>
-
-# Hi, I'm Aditya
 
 Portfolio coming soon.
 

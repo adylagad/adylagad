@@ -6,13 +6,24 @@
   html, body {
     margin: 0;
     padding: 0;
-    width: 700px;
+    width: 1000px;
     height: 220px;
     background: #0d1117;
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+  #stage {
+    display: flex;
+    align-items: baseline;
+  }
+  #prefix {
+    font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 64px;
+    font-weight: 500;
+    color: #8b949e;
+    white-space: pre;
   }
   #name {
     font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
@@ -29,7 +40,7 @@
 </head>
 <body>
   <div id="stage">
-    <div id="name">Aditya</div>
+    <span id="prefix">Hi, I'm </span><div id="name">Aditya</div>
   </div>
 
   <script src="gsap.min.js"></script>
