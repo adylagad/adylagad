@@ -1,40 +1,83 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="760" height="640" viewBox="0 0 760 640" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="680" viewBox="0 0 780 680" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif">
   <style>
     .dot-light { transform-box: fill-box; transform-origin: center; animation-name: pop; animation-duration: 0.35s; animation-timing-function: cubic-bezier(0.34,1.56,0.64,1); animation-fill-mode: both; }
     .fade-light { animation-name: fadein; animation-duration: 0.5s; animation-timing-function: ease-out; animation-fill-mode: both; }
     .subfade-light { animation-name: fadein-sub; animation-duration: 0.35s; animation-timing-function: ease-out; animation-fill-mode: both; }
-    .rail-light { stroke-dasharray: 436; stroke-dashoffset: 436; animation: draw-light 2s cubic-bezier(0.45,0,0.55,1) both; }
+    .rail-light { stroke-dasharray: 468; stroke-dashoffset: 468; animation: draw-light 2s cubic-bezier(0.45,0,0.55,1) both; }
     @keyframes draw-light { to { stroke-dashoffset: 0; } }
     @keyframes pop { from { transform: scale(0); } to { transform: scale(1); } }
     @keyframes fadein { from { opacity: 0; transform: translateX(16px); } to { opacity: 1; transform: translateX(0); } }
     @keyframes fadein-sub { from { opacity: 0; } to { opacity: 1; } }
   </style>
-  <rect width="760" height="640" fill="#ffffff"/>
-  <line class="rail-light" x1="66" y1="102" x2="66" y2="538" stroke="#2C224D" stroke-width="2" stroke-linecap="round"/>
-  <circle class="dot-light" cx="66" cy="102" r="8" fill="#ffffff" stroke="#2C224D" stroke-width="2" style="animation-delay:0.00s"/>
+  <rect width="780" height="680" fill="#ffffff"/>
+  <line class="rail-light" x1="66" y1="106" x2="66" y2="574" stroke="#d8d2c8" stroke-width="2" stroke-linecap="round"/>
+  <circle class="dot-light" cx="66" cy="106" r="8" fill="#ffffff" stroke="#6BE675" stroke-width="3" style="animation-delay:0.00s"/>
 <g class="fade-light" style="animation-delay:0.05s">
-<text x="100" y="76" font-size="21" font-weight="700" fill="#1f2328">Junior Software Engineer <tspan fill="#2C224D" font-weight="600">@ Fetch.ai</tspan> <tspan font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" fill="#c2410c"> May 2026 — Present</tspan></text>
-<text x="100" y="110" font-size="14" fill="#57606a">Building AI agents and contributing to the ASI One mobile team.</text>
+<text x="100" y="76" font-size="21" font-weight="700" fill="#1a1a1a">Junior Software Engineer @ </text>
+<g transform="rotate(-3 502.6 70.3)">
+    <rect x="442.2" y="57.5" width="124.8" height="31.7" rx="6" fill="#000000" opacity="0.35"/>
+    <rect x="440.2" y="54.5" width="124.8" height="31.7" rx="6" fill="#6BE675"/>
+    <text x="452.2" y="76" font-size="21" font-weight="700" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" fill="#111111">Fetch.ai</text>
+  </g><g transform="rotate(2 656.2 72.5)">
+    <rect x="579.0" y="64.4" width="158.4" height="22.2" rx="6" fill="#000000" opacity="0.35"/>
+    <rect x="577.0" y="61.4" width="158.4" height="22.2" rx="6" fill="#8B7CF6"/>
+    <text x="586.0" y="76" font-size="13" font-weight="700" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#111111">May 2026 — Present</text>
+  </g><text x="100" y="112" font-size="14" fill="#5c5650">Building AI agents and contributing to the ASI One mobile team.</text>
 </g>
-<circle class="dot-light" cx="66" cy="210" r="8" fill="#ffffff" stroke="#2C224D" stroke-width="2" style="animation-delay:0.50s"/>
+<circle class="dot-light" cx="66" cy="222" r="8" fill="#ffffff" stroke="#FF7A1A" stroke-width="3" style="animation-delay:0.50s"/>
 <g class="fade-light" style="animation-delay:0.55s">
-<text x="100" y="184" font-size="21" font-weight="700" fill="#1f2328">Software Engineer Intern <tspan fill="#2C224D" font-weight="600">@ Orbit AI</tspan> <tspan font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" fill="#c2410c"> Jan 2026 — May 2026</tspan></text>
-<text x="100" y="218" font-size="14" fill="#57606a">Built full-stack features for AI-powered, personalized college admissions guidance.</text>
+<text x="100" y="192" font-size="21" font-weight="700" fill="#1a1a1a">Software Engineer Intern @ </text>
+<g transform="rotate(-2 502.6 186.3)">
+    <rect x="442.2" y="173.5" width="124.8" height="31.7" rx="6" fill="#000000" opacity="0.35"/>
+    <rect x="440.2" y="170.5" width="124.8" height="31.7" rx="6" fill="#FF7A1A"/>
+    <text x="452.2" y="192" font-size="21" font-weight="700" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" fill="#111111">Orbit AI</text>
+  </g><g transform="rotate(3 660.1 188.5)">
+    <rect x="579.0" y="180.4" width="166.2" height="22.2" rx="6" fill="#000000" opacity="0.35"/>
+    <rect x="577.0" y="177.4" width="166.2" height="22.2" rx="6" fill="#F45CC0"/>
+    <text x="586.0" y="192" font-size="13" font-weight="700" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#111111">Jan 2026 — May 2026</text>
+  </g><text x="100" y="228" font-size="14" fill="#5c5650">Built full-stack features for AI-powered, personalized college admissions guidance.</text>
 </g>
-<circle class="dot-light" cx="66" cy="374" r="8" fill="#ffffff" stroke="#2C224D" stroke-width="2" style="animation-delay:1.25s"/>
+<circle class="dot-light" cx="66" cy="398" r="8" fill="#ffffff" stroke="#6BE675" stroke-width="3" style="animation-delay:1.25s"/>
 <g class="fade-light" style="animation-delay:1.30s">
-<text x="100" y="292" font-size="21" font-weight="700" fill="#1f2328">Bajaj Finserv Health <tspan font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" fill="#c2410c"> Jan 2023 — Apr 2025</tspan></text>
-<line x1="108" y1="312" x2="108" y2="388" stroke="#d0d7de" stroke-width="2"/>
-<g class="subfade-light" style="animation-delay:1.50s"><circle cx="108" cy="322" r="4" fill="#2C224D"/><text x="126" y="326" font-size="14" font-weight="600" fill="#24292f">Software Engineer <tspan font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#c2410c">Oct 2024 — Apr 2025</tspan></text></g>
-<g class="subfade-light" style="animation-delay:1.60s"><circle cx="108" cy="356" r="4" fill="#2C224D"/><text x="126" y="360" font-size="14" font-weight="600" fill="#24292f">Associate Software Engineer <tspan font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#c2410c">Jul 2023 — Sep 2024</tspan></text></g>
-<g class="subfade-light" style="animation-delay:1.70s"><circle cx="108" cy="390" r="4" fill="#2C224D"/><text x="126" y="394" font-size="14" font-weight="600" fill="#24292f">Software Engineer Intern <tspan font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#c2410c">Jan 2023 — Jun 2023</tspan></text></g>
-<text x="100" y="424" font-size="14" fill="#57606a">Progressed from intern to full-time engineer, building features and</text>
-<text x="100" y="444" font-size="14" fill="#57606a">improving performance across mobile and web.</text>
+<g transform="rotate(-2.5 238.0 302.3)">
+    <rect x="102.0" y="289.5" width="276.0" height="31.7" rx="6" fill="#000000" opacity="0.35"/>
+    <rect x="100.0" y="286.5" width="276.0" height="31.7" rx="6" fill="#6BE675"/>
+    <text x="112.0" y="308" font-size="21" font-weight="700" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" fill="#111111">Bajaj Finserv Health</text>
+  </g><g transform="rotate(2.5 471.1 304.5)">
+    <rect x="390.0" y="296.4" width="166.2" height="22.2" rx="6" fill="#000000" opacity="0.35"/>
+    <rect x="388.0" y="293.4" width="166.2" height="22.2" rx="6" fill="#8B7CF6"/>
+    <text x="397.0" y="308" font-size="13" font-weight="700" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#111111">Jan 2023 — Apr 2025</text>
+  </g><line x1="108" y1="332" x2="108" y2="416" stroke="#d8d2c8" stroke-width="2"/>
+<g class="subfade-light" style="animation-delay:1.50s"><circle cx="108" cy="342" r="4" fill="#FF7A1A"/><text x="126" y="346" font-size="14" font-weight="600" fill="#26241f">Software Engineer </text><g transform="rotate(-3 354.6 342.8)">
+    <rect x="279.2" y="335.1" width="154.8" height="21.3" rx="6" fill="#000000" opacity="0.35"/>
+    <rect x="277.2" y="332.1" width="154.8" height="21.3" rx="6" fill="#F45CC0"/>
+    <text x="286.2" y="346" font-size="12" font-weight="700" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#111111">Oct 2024 — Apr 2025</text>
+  </g></g>
+<g class="subfade-light" style="animation-delay:1.60s"><circle cx="108" cy="380" r="4" fill="#6BE675"/><text x="126" y="384" font-size="14" font-weight="600" fill="#26241f">Associate Software Engineer </text><g transform="rotate(2 438.6 380.8)">
+    <rect x="363.2" y="373.1" width="154.8" height="21.3" rx="6" fill="#000000" opacity="0.35"/>
+    <rect x="361.2" y="370.1" width="154.8" height="21.3" rx="6" fill="#8B7CF6"/>
+    <text x="370.2" y="384" font-size="12" font-weight="700" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#111111">Jul 2023 — Sep 2024</text>
+  </g></g>
+<g class="subfade-light" style="animation-delay:1.70s"><circle cx="108" cy="418" r="4" fill="#FF7A1A"/><text x="126" y="422" font-size="14" font-weight="600" fill="#26241f">Software Engineer Intern </text><g transform="rotate(-2 413.4 418.8)">
+    <rect x="338.0" y="411.1" width="154.8" height="21.3" rx="6" fill="#000000" opacity="0.35"/>
+    <rect x="336.0" y="408.1" width="154.8" height="21.3" rx="6" fill="#F45CC0"/>
+    <text x="345.0" y="422" font-size="12" font-weight="700" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#111111">Jan 2023 — Jun 2023</text>
+  </g></g>
+<text x="100" y="454" font-size="14" fill="#5c5650">Progressed from intern to full-time engineer, building features and</text>
+<text x="100" y="474" font-size="14" fill="#5c5650">improving performance across mobile and web.</text>
 </g>
-<circle class="dot-light" cx="66" cy="538" r="8" fill="#ffffff" stroke="#2C224D" stroke-width="2" style="animation-delay:2.00s"/>
+<circle class="dot-light" cx="66" cy="574" r="8" fill="#ffffff" stroke="#6BE675" stroke-width="3" style="animation-delay:2.00s"/>
 <g class="fade-light" style="animation-delay:2.05s">
-<text x="100" y="512" font-size="21" font-weight="700" fill="#1f2328">Software Engineer Intern <tspan fill="#2C224D" font-weight="600">@ CuriousJr</tspan> <tspan font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" fill="#c2410c"> May 2022 — Dec 2022</tspan></text>
-<text x="100" y="546" font-size="14" fill="#57606a">Built educational games that made learning fun and engaging for kids.</text>
+<text x="100" y="544" font-size="21" font-weight="700" fill="#1a1a1a">Software Engineer Intern @ </text>
+<g transform="rotate(3 508.9 538.3)">
+    <rect x="442.2" y="525.5" width="137.4" height="31.7" rx="6" fill="#000000" opacity="0.35"/>
+    <rect x="440.2" y="522.5" width="137.4" height="31.7" rx="6" fill="#6BE675"/>
+    <text x="452.2" y="544" font-size="21" font-weight="700" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" fill="#111111">CuriousJr</text>
+  </g><g transform="rotate(-2.5 672.7 540.5)">
+    <rect x="591.6" y="532.4" width="166.2" height="22.2" rx="6" fill="#000000" opacity="0.35"/>
+    <rect x="589.6" y="529.4" width="166.2" height="22.2" rx="6" fill="#8B7CF6"/>
+    <text x="598.6" y="544" font-size="13" font-weight="700" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#111111">May 2022 — Dec 2022</text>
+  </g><text x="100" y="580" font-size="14" fill="#5c5650">Built educational games that made learning fun and engaging for kids.</text>
 </g>
 
 </svg>

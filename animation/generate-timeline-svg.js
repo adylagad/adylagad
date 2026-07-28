@@ -3,21 +3,31 @@
 // Uses CSS animations (not GSAP/JS) since GitHub strips <script> from SVGs
 // embedded via <img>, but CSS @keyframes still run in that context.
 //
-// Only class selectors are used for animated/painted elements (no `id`,
-// no url(#id) gradient refs) — GitHub's image pipeline strips `id`
-// attributes from embedded SVGs, which silently breaks both CSS id
-// selectors and gradient IRI references, leaving shapes unstyled/invisible
-// with no error.
+// Visual style follows gsap.com: black background, cream body text, and
+// key words (company names, dates) called out as solid-color, slightly
+// rotated "chip" badges with black text rather than a single accent hue.
+// No `id` attributes anywhere — GitHub's image pipeline strips ids from
+// embedded SVGs, which silently breaks id-based CSS selectors and
+// url(#id) references (found the hard way with an earlier gradient rail).
 const fs = require("fs");
 const path = require("path");
 
-const WIDTH = 760;
+const WIDTH = 780;
 const PAD_LEFT = 48;
 const PAD_TOP = 48;
 const PAD_BOTTOM = 48;
 const RAIL_X = PAD_LEFT + 18;
 const TEXT_X = RAIL_X + 34;
 const LINE_DURATION = 2.0;
+
+// Chip colors are theme-independent -- they carry their own background
+// fill and always use black text, so they read the same on light or dark.
+const BADGE_COLORS = ["#6BE675", "#8B7CF6", "#FF7A1A", "#F45CC0"];
+const ROTATIONS = [-3, 2, -2, 3, -2.5, 2.5];
+let colorCursor = 0;
+let rotationCursor = 0;
+function nextBadgeColor() { return BADGE_COLORS[colorCursor++ % BADGE_COLORS.length]; }
+function nextRotation() { return ROTATIONS[rotationCursor++ % ROTATIONS.length]; }
 
 const entries = [
   {
@@ -53,10 +63,10 @@ const entries = [
   },
 ];
 
-// Manually laid out row geometry: each normal entry reserves 108px, the
+// Manually laid out row geometry: each normal entry reserves 116px, the
 // grouped Bajaj entry reserves more for its header + 3 sub-roles + 2-line
 // blurb, all with generous breathing room between blocks.
-const rowHeights = [108, 108, 220, 108];
+const rowHeights = [116, 116, 236, 116];
 let top = PAD_TOP;
 const rows = rowHeights.map(h => {
   const row = { top, height: h, centerY: top + h / 2 };
@@ -69,32 +79,56 @@ function palette(theme) {
   return theme === "dark"
     ? {
         bg: "#0d1117",
-        title: "#e6edf3",
-        company: "#5b4e99",
-        date: "#fb923c",
-        blurb: "#8b949e",
-        subTitle: "#c9d1d9",
-        subRail: "#21262d",
+        title: "#f2ede0",
+        blurb: "#9a938a",
+        subTitle: "#d8d2c5",
+        subRail: "#30363d",
+        rail: "#30363d",
         dotFill: "#0d1117",
-        dotStroke: "#5b4e99",
-        rail: "#5b4e99",
       }
     : {
         bg: "#ffffff",
-        title: "#1f2328",
-        company: "#2C224D",
-        date: "#c2410c",
-        blurb: "#57606a",
-        subTitle: "#24292f",
-        subRail: "#d0d7de",
+        title: "#1a1a1a",
+        blurb: "#5c5650",
+        subTitle: "#26241f",
+        subRail: "#d8d2c8",
+        rail: "#d8d2c8",
         dotFill: "#ffffff",
-        dotStroke: "#2C224D",
-        rail: "#2C224D",
       };
 }
 
 function esc(s) {
   return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+// Rough average-char-width estimate (good enough for sizing a decorative
+// chip background, not pixel-exact text layout).
+function estimateWidth(text, fontSize) {
+  return text.length * fontSize * 0.6;
+}
+
+// A rotated, drop-shadowed "chip": colored rect + black text, offset
+// shadow rect behind it instead of an SVG filter (feDropShadow needs an
+// id-able <filter>, which GitHub's sanitizer would strip).
+function buildChip(x, baseline, text, { fontSize, mono, color }) {
+  const padX = fontSize >= 18 ? 12 : 9;
+  const padY = fontSize >= 18 ? 6 : 5;
+  const textW = estimateWidth(text, fontSize);
+  const chipW = textW + padX * 2;
+  const chipH = fontSize * 0.94 + padY * 2;
+  const chipY = baseline - fontSize * 0.74 - padY;
+  const cx = x + chipW / 2;
+  const cy = chipY + chipH / 2;
+  const rot = nextRotation();
+  const fontFamily = mono
+    ? "ui-monospace, SFMono-Regular, Menlo, monospace"
+    : "-apple-system, Segoe UI, Helvetica, Arial, sans-serif";
+  const svg = `<g transform="rotate(${rot} ${cx.toFixed(1)} ${cy.toFixed(1)})">
+    <rect x="${(x + 2).toFixed(1)}" y="${(chipY + 3).toFixed(1)}" width="${chipW.toFixed(1)}" height="${chipH.toFixed(1)}" rx="6" fill="#000000" opacity="0.35"/>
+    <rect x="${x.toFixed(1)}" y="${chipY.toFixed(1)}" width="${chipW.toFixed(1)}" height="${chipH.toFixed(1)}" rx="6" fill="${color}"/>
+    <text x="${(x + padX).toFixed(1)}" y="${baseline}" font-size="${fontSize}" font-weight="700" font-family="${fontFamily}" fill="#111111">${esc(text)}</text>
+  </g>`;
+  return { svg, width: chipW };
 }
 
 function buildSvg(theme) {
@@ -103,7 +137,7 @@ function buildSvg(theme) {
   const lastY = rows[rows.length - 1].centerY;
   const lineLength = lastY - firstY;
 
-  let style = `
+  const style = `
     .dot-${theme} { transform-box: fill-box; transform-origin: center; animation-name: pop; animation-duration: 0.35s; animation-timing-function: cubic-bezier(0.34,1.56,0.64,1); animation-fill-mode: both; }
     .fade-${theme} { animation-name: fadein; animation-duration: 0.5s; animation-timing-function: ease-out; animation-fill-mode: both; }
     .subfade-${theme} { animation-name: fadein-sub; animation-duration: 0.35s; animation-timing-function: ease-out; animation-fill-mode: both; }
@@ -114,41 +148,63 @@ function buildSvg(theme) {
     @keyframes fadein-sub { from { opacity: 0; } to { opacity: 1; } }
   `;
 
+  colorCursor = 0;
+  rotationCursor = 0;
+
   let body = "";
   entries.forEach((entry, i) => {
     const row = rows[i];
     const atLine = ((row.centerY - firstY) / lineLength) * LINE_DURATION;
-
-    body += `<circle class="dot-${theme}" cx="${RAIL_X}" cy="${row.centerY}" r="8" fill="${c.dotFill}" stroke="${c.dotStroke}" stroke-width="2" style="animation-delay:${atLine.toFixed(2)}s"/>\n`;
-
     const titleBaseline = row.top + 28;
-    let titleSpans = `${esc(entry.title)} `;
-    if (entry.company) {
-      titleSpans += `<tspan fill="${c.company}" font-weight="600">@ ${esc(entry.company)}</tspan> `;
-    }
-    titleSpans += `<tspan font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" fill="${c.date}"> ${esc(entry.dates)}</tspan>`;
+
+    // Company/group name is always the entry's primary color; the dot on
+    // the rail borrows that same color for continuity.
+    const entryColor = nextBadgeColor();
+    const dateColor = nextBadgeColor();
+
+    body += `<circle class="dot-${theme}" cx="${RAIL_X}" cy="${row.centerY}" r="8" fill="${c.dotFill}" stroke="${entryColor}" stroke-width="3" style="animation-delay:${atLine.toFixed(2)}s"/>\n`;
 
     body += `<g class="fade-${theme}" style="animation-delay:${(atLine + 0.05).toFixed(2)}s">\n`;
-    body += `<text x="${TEXT_X}" y="${titleBaseline}" font-size="21" font-weight="700" fill="${c.title}">${titleSpans}</text>\n`;
+
+    let cursorX = TEXT_X;
+    if (entry.company) {
+      const prefix = `${entry.title} @ `;
+      body += `<text x="${cursorX}" y="${titleBaseline}" font-size="21" font-weight="700" fill="${c.title}">${esc(prefix)}</text>\n`;
+      cursorX += estimateWidth(prefix, 21);
+      const chip = buildChip(cursorX, titleBaseline, entry.company, { fontSize: 21, color: entryColor });
+      body += chip.svg;
+      cursorX += chip.width + 12;
+    } else {
+      const chip = buildChip(cursorX, titleBaseline, entry.title, { fontSize: 21, color: entryColor });
+      body += chip.svg;
+      cursorX += chip.width + 12;
+    }
+    const dateChip = buildChip(cursorX, titleBaseline, entry.dates, { fontSize: 13, mono: true, color: dateColor });
+    body += dateChip.svg;
 
     let blurbStartY;
 
     if (entry.subRoles) {
-      const railTop = titleBaseline + 20;
-      const rowH = 34;
+      const railTop = titleBaseline + 24;
+      const rowH = 38;
       const railBottom = railTop + (entry.subRoles.length - 1) * rowH + 8;
       body += `<line x1="${TEXT_X + 8}" y1="${railTop}" x2="${TEXT_X + 8}" y2="${railBottom}" stroke="${c.subRail}" stroke-width="2"/>\n`;
 
       entry.subRoles.forEach((sr, si) => {
         const y = railTop + si * rowH + 14;
+        const subDotColor = nextBadgeColor();
+        const subDateColor = nextBadgeColor();
         body += `<g class="subfade-${theme}" style="animation-delay:${(atLine + 0.25 + si * 0.1).toFixed(2)}s">`;
-        body += `<circle cx="${TEXT_X + 8}" cy="${y - 4}" r="4" fill="${c.company}"/>`;
-        body += `<text x="${TEXT_X + 26}" y="${y}" font-size="14" font-weight="600" fill="${c.subTitle}">${esc(sr.title)} <tspan font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="${c.date}">${esc(sr.dates)}</tspan></text>`;
+        body += `<circle cx="${TEXT_X + 8}" cy="${y - 4}" r="4" fill="${subDotColor}"/>`;
+        body += `<text x="${TEXT_X + 26}" y="${y}" font-size="14" font-weight="600" fill="${c.subTitle}">${esc(sr.title)} </text>`;
+        const srTextW = estimateWidth(sr.title + " ", 14);
+        const srChip = buildChip(TEXT_X + 26 + srTextW, y, sr.dates, { fontSize: 12, mono: true, color: subDateColor });
+        body += srChip.svg;
         body += `</g>\n`;
       });
-      blurbStartY = railTop + (entry.subRoles.length - 1) * rowH + 14 + 30;
+      blurbStartY = railTop + (entry.subRoles.length - 1) * rowH + 14 + 32;
     } else {
-      blurbStartY = titleBaseline + 34;
+      blurbStartY = titleBaseline + 36;
     }
 
     entry.blurbLines.forEach((line, li) => {
