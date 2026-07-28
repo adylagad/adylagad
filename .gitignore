@@ -1,2 +1,14 @@
 node_modules/
 package-lock.json
+
+# Regenerable skill installs — reproduced from skills-lock.json
+# (.claude/skills/gsap-* are symlinks into .agents/skills/, so no trailing slash)
+.agents/
+.claude/skills/gsap-core
+.claude/skills/gsap-frameworks
+.claude/skills/gsap-performance
+.claude/skills/gsap-plugins
+.claude/skills/gsap-react
+.claude/skills/gsap-scrolltrigger
+.claude/skills/gsap-timeline
+.claude/skills/gsap-utils
