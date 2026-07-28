@@ -70,14 +70,14 @@ function palette(theme) {
     ? {
         bg: "#0d1117",
         title: "#e6edf3",
-        company: "#818cf8",
+        company: "#6366f1",
         date: "#fb923c",
         blurb: "#8b949e",
         subTitle: "#c9d1d9",
         subRail: "#21262d",
         dotFill: "#0d1117",
-        dotStroke: "#818cf8",
-        rail: "#818cf8",
+        dotStroke: "#6366f1",
+        rail: "#6366f1",
       }
     : {
         bg: "#ffffff",

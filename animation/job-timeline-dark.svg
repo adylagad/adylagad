@@ -10,30 +10,30 @@
     @keyframes fadein-sub { from { opacity: 0; } to { opacity: 1; } }
   </style>
   <rect width="760" height="640" fill="#0d1117"/>
-  <line class="rail-dark" x1="66" y1="102" x2="66" y2="538" stroke="#818cf8" stroke-width="2" stroke-linecap="round"/>
-  <circle class="dot-dark" cx="66" cy="102" r="8" fill="#0d1117" stroke="#818cf8" stroke-width="2" style="animation-delay:0.00s"/>
+  <line class="rail-dark" x1="66" y1="102" x2="66" y2="538" stroke="#6366f1" stroke-width="2" stroke-linecap="round"/>
+  <circle class="dot-dark" cx="66" cy="102" r="8" fill="#0d1117" stroke="#6366f1" stroke-width="2" style="animation-delay:0.00s"/>
 <g class="fade-dark" style="animation-delay:0.05s">
-<text x="100" y="76" font-size="21" font-weight="700" fill="#e6edf3">Junior Software Engineer <tspan fill="#818cf8" font-weight="600">@ Fetch.ai</tspan> <tspan font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" fill="#fb923c"> May 2026 — Present</tspan></text>
+<text x="100" y="76" font-size="21" font-weight="700" fill="#e6edf3">Junior Software Engineer <tspan fill="#6366f1" font-weight="600">@ Fetch.ai</tspan> <tspan font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" fill="#fb923c"> May 2026 — Present</tspan></text>
 <text x="100" y="110" font-size="14" fill="#8b949e">Building AI agents and contributing to the ASI One mobile team.</text>
 </g>
-<circle class="dot-dark" cx="66" cy="210" r="8" fill="#0d1117" stroke="#818cf8" stroke-width="2" style="animation-delay:0.50s"/>
+<circle class="dot-dark" cx="66" cy="210" r="8" fill="#0d1117" stroke="#6366f1" stroke-width="2" style="animation-delay:0.50s"/>
 <g class="fade-dark" style="animation-delay:0.55s">
-<text x="100" y="184" font-size="21" font-weight="700" fill="#e6edf3">Software Engineer Intern <tspan fill="#818cf8" font-weight="600">@ Orbit AI</tspan> <tspan font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" fill="#fb923c"> Jan 2026 — May 2026</tspan></text>
+<text x="100" y="184" font-size="21" font-weight="700" fill="#e6edf3">Software Engineer Intern <tspan fill="#6366f1" font-weight="600">@ Orbit AI</tspan> <tspan font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" fill="#fb923c"> Jan 2026 — May 2026</tspan></text>
 <text x="100" y="218" font-size="14" fill="#8b949e">Built full-stack features for AI-powered, personalized college admissions guidance.</text>
 </g>
-<circle class="dot-dark" cx="66" cy="374" r="8" fill="#0d1117" stroke="#818cf8" stroke-width="2" style="animation-delay:1.25s"/>
+<circle class="dot-dark" cx="66" cy="374" r="8" fill="#0d1117" stroke="#6366f1" stroke-width="2" style="animation-delay:1.25s"/>
 <g class="fade-dark" style="animation-delay:1.30s">
 <text x="100" y="292" font-size="21" font-weight="700" fill="#e6edf3">Bajaj Finserv Health <tspan font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" fill="#fb923c"> Jan 2023 — Apr 2025</tspan></text>
 <line x1="108" y1="312" x2="108" y2="388" stroke="#21262d" stroke-width="2"/>
-<g class="subfade-dark" style="animation-delay:1.50s"><circle cx="108" cy="322" r="4" fill="#818cf8"/><text x="126" y="326" font-size="14" font-weight="600" fill="#c9d1d9">Software Engineer <tspan font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#fb923c">Oct 2024 — Apr 2025</tspan></text></g>
-<g class="subfade-dark" style="animation-delay:1.60s"><circle cx="108" cy="356" r="4" fill="#818cf8"/><text x="126" y="360" font-size="14" font-weight="600" fill="#c9d1d9">Associate Software Engineer <tspan font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#fb923c">Jul 2023 — Sep 2024</tspan></text></g>
-<g class="subfade-dark" style="animation-delay:1.70s"><circle cx="108" cy="390" r="4" fill="#818cf8"/><text x="126" y="394" font-size="14" font-weight="600" fill="#c9d1d9">Software Engineer Intern <tspan font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#fb923c">Jan 2023 — Jun 2023</tspan></text></g>
+<g class="subfade-dark" style="animation-delay:1.50s"><circle cx="108" cy="322" r="4" fill="#6366f1"/><text x="126" y="326" font-size="14" font-weight="600" fill="#c9d1d9">Software Engineer <tspan font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#fb923c">Oct 2024 — Apr 2025</tspan></text></g>
+<g class="subfade-dark" style="animation-delay:1.60s"><circle cx="108" cy="356" r="4" fill="#6366f1"/><text x="126" y="360" font-size="14" font-weight="600" fill="#c9d1d9">Associate Software Engineer <tspan font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#fb923c">Jul 2023 — Sep 2024</tspan></text></g>
+<g class="subfade-dark" style="animation-delay:1.70s"><circle cx="108" cy="390" r="4" fill="#6366f1"/><text x="126" y="394" font-size="14" font-weight="600" fill="#c9d1d9">Software Engineer Intern <tspan font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#fb923c">Jan 2023 — Jun 2023</tspan></text></g>
 <text x="100" y="424" font-size="14" fill="#8b949e">Progressed from intern to full-time engineer, building features and</text>
 <text x="100" y="444" font-size="14" fill="#8b949e">improving performance across mobile and web.</text>
 </g>
-<circle class="dot-dark" cx="66" cy="538" r="8" fill="#0d1117" stroke="#818cf8" stroke-width="2" style="animation-delay:2.00s"/>
+<circle class="dot-dark" cx="66" cy="538" r="8" fill="#0d1117" stroke="#6366f1" stroke-width="2" style="animation-delay:2.00s"/>
 <g class="fade-dark" style="animation-delay:2.05s">
-<text x="100" y="512" font-size="21" font-weight="700" fill="#e6edf3">Software Engineer Intern <tspan fill="#818cf8" font-weight="600">@ CuriousJr</tspan> <tspan font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" fill="#fb923c"> May 2022 — Dec 2022</tspan></text>
+<text x="100" y="512" font-size="21" font-weight="700" fill="#e6edf3">Software Engineer Intern <tspan fill="#6366f1" font-weight="600">@ CuriousJr</tspan> <tspan font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" fill="#fb923c"> May 2022 — Dec 2022</tspan></text>
 <text x="100" y="546" font-size="14" fill="#8b949e">Built educational games that made learning fun and engaging for kids.</text>
 </g>
 
